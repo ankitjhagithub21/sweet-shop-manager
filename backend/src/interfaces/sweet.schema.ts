@@ -14,11 +14,12 @@ export enum SweetCategory {
 }
 
 export interface ISweet {
+  _id?:Schema.Types.ObjectId;
   name: string;
   description?: string;
   category: SweetCategory;
   price: number;
   stock: number;
-  imageUrl?: string;
+  image: string;
   createdBy: Schema.Types.ObjectId;
 }

@@ -4,7 +4,7 @@ import { IUser } from "../interfaces/user.schema";
 
 export const generateToken = (user:IUser) => {
      return  jwt.sign(
-      { userId:user._id },
+      { id:user._id, email:user.email, role:user.role },
       ENV.JWT_SECRET,
       { expiresIn: "7d" }
     );

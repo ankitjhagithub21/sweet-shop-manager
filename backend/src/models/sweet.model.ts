@@ -10,12 +10,6 @@ const sweetSchema = new Schema<ISweet>(
       required:true
     },
 
-    description: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-
     category: {
       type: String,
       required:true
@@ -23,6 +17,11 @@ const sweetSchema = new Schema<ISweet>(
 
     price: {
       type: Number,
+      required:true
+    },
+
+    image: {
+      type: String,
       required:true
     },
 
