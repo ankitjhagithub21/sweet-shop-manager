@@ -11,9 +11,10 @@ import PublicRoute from "./routes/PublicRoute";
 import AdminRoute from "./routes/AdminRoute";
 import AddSweetPage from "./pages/AddSweetPage";
 import Navbar from "./components/Navbar";
+import Loader from "./components/Loader";
 
 const App = () => {
-  const { loadUser } = useUserStore();
+  const { loadUser, loadingUser } = useUserStore();
 
   const router = createBrowserRouter([
     {
@@ -60,6 +61,9 @@ const App = () => {
     loadUser();
   }, []);
 
+  if(loadingUser){
+    return <Loader/>
+  }
   return (
     <div>
       <RouterProvider router={router} />
