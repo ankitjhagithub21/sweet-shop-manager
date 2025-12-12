@@ -1,98 +1,46 @@
+import { registerService, loginService } from "../services/auth.service";
 import { Request, Response } from "express";
-import { User } from "../models/user.model";
-import bcrypt from "bcryptjs";
-import { generateToken } from "../utils/generateToken";
 
 export const register = async (req: Request, res: Response) => {
   try {
-    const { name, email, password } = await req.body;
-
-    const existedUser = await User.findOne({ email });
-    if (existedUser) {
-      return res
-        .status(409)
-        .json({ message: "Please use different email.", success: false });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-    });
-
-    const token = generateToken(newUser);
-
-    const userResponse = {
-      _id: newUser._id,
-      name: newUser.name,
-      email: newUser.email,
-      role:newUser.role
-    };
+    const { user, token } = await registerService(req.body);
 
     res
       .cookie("auth", token, {
         httpOnly: true,
         secure: true,
         sameSite: "strict",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milisecond
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
       .status(201)
-      .json({
-        message: "User registered successfully",
-        success: true,
-        user: userResponse,
-      });
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error.", success: false });
+      .json({ message: "User registered", success: true, user });
+  } catch (error: any) {
+    res.status(400).json({ success: false, message: error.message || "Registration failed." });
   }
 };
 
 export const login = async (req: Request, res: Response) => {
   try {
-    const { email, password } = await req.body;
+    const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const { user, token } = await loginService({ email, password });
 
-    if (!user) {
-      return res
-        .status(404)
-        .json({ message: "User not found.", success: false });
-    }
-
-    const isValidPassword = await bcrypt.compare(password, user.password);
-
-    if (!isValidPassword) {
-      return res
-        .status(404)
-        .json({ message: "Wrong email or password.", success: false });
-    }
-
-  
-    const token = generateToken(user);
-
-    res
+    return res
       .cookie("auth", token, {
         httpOnly: true,
         secure: true,
         sameSite: "strict",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milisecond
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
-      .status(201)
+      .status(200)
       .json({
-        message: "User registered successfully",
+        message: "Login successful",
         success: true,
-        user: {
-          _id:user._id, 
-          name:user.name,
-          email:user.email,
-          role:user.role
-        },
+        user,
       });
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error.", success: false });
+  } catch (error: any) {
+    return res
+      .status(400)
+      .json({ success: false, message: error.message || "Login failed" });
   }
 };
-
-
