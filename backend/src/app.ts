@@ -2,7 +2,7 @@ import express, { Application } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes";
-// import sweetRoutes from "./routes/sweet.routes";
+import sweetRoutes from "./routes/sweet.routes";
 // import inventoryRoutes from "./routes/inventory.routes";
 
 const app: Application = express();
@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", authRoutes);
-// app.use("/api/sweets", sweetRoutes);
+app.use("/api/sweets", sweetRoutes);
 // app.use("/api/inventory", inventoryRoutes);
 
 // Health check endpoint

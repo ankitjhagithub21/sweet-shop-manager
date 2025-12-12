@@ -34,7 +34,7 @@ export const authMiddleware = async (
     }
 
     // Attach user to request
-    (req as any).user = user;
+    req.user = user;
 
     next();
   } catch (error) {

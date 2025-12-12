@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { ISweet } from "../interfaces/sweet.schema";
 
 
@@ -25,7 +25,7 @@ const sweetSchema = new Schema<ISweet>(
       required:true
     },
 
-    stock: {
+    quantity: {
       type: Number,
       required:true
     },
@@ -33,7 +33,8 @@ const sweetSchema = new Schema<ISweet>(
     createdBy: {
       type: Schema.Types.ObjectId,
       ref:"User",
-      required:true
+      required:true,
+      select:false
     },
 
   },
