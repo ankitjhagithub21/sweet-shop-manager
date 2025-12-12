@@ -13,7 +13,7 @@ import upload from "../config/multer";
 
 const router = Router();
 
-// Public or User routes
+// User routes
 router.get("/", authMiddleware, getAllSweetsController);
 router.get("/search", authMiddleware, searchSweetsController);
 
