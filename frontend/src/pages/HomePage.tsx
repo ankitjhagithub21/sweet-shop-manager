@@ -1,8 +1,13 @@
+import Sweets from "../components/Sweets"
+
 
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+
+    <>
+    <Sweets/>
+    </>
   )
 }
 

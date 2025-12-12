@@ -9,7 +9,7 @@ export const registerController = async (req: Request, res: Response) => {
       .cookie("auth", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
       .status(201)
@@ -34,7 +34,7 @@ export const loginController = async (req: Request, res: Response) => {
       .cookie("auth", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
       .status(200)

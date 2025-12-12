@@ -8,31 +8,47 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import { useEffect } from "react";
 import { useUserStore } from "./store/useUserStore";
 import PublicRoute from "./routes/PublicRoute";
+import AdminRoute from "./routes/AdminRoute";
+import AddSweetPage from "./pages/AddSweetPage";
+import Navbar from "./components/Navbar";
 
 const App = () => {
-  
-  const {loadUser} = useUserStore()
-  
+  const { loadUser } = useUserStore();
+
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
         <ProtectedRoute>
+          <Navbar/>
           <HomePage />
         </ProtectedRoute>
       ),
     },
     {
+      path: "/add",
+      element: (
+        <AdminRoute>
+          <Navbar/>
+          <AddSweetPage />
+        </AdminRoute>
+      ),
+    },
+    {
       path: "/login",
-      element: <PublicRoute>
-        <LoginPage />
-      </PublicRoute>,
+      element: (
+        <PublicRoute>
+          <LoginPage />
+        </PublicRoute>
+      ),
     },
     {
       path: "/register",
-      element: <PublicRoute>
-        <RegisterPage />
-      </PublicRoute>,
+      element: (
+        <PublicRoute>
+          <RegisterPage />
+        </PublicRoute>
+      ),
     },
     {
       path: "*",
@@ -40,9 +56,9 @@ const App = () => {
     },
   ]);
 
-  useEffect(()=>{
-    loadUser()
-  },[])
+  useEffect(() => {
+    loadUser();
+  }, []);
 
   return (
     <div>
