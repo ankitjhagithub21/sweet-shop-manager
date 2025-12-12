@@ -4,7 +4,7 @@ import {
   restockSweetService,
 } from "../services/inventory.service";
 
-export const purchaseSweet = async (req: Request, res: Response) => {
+export const purchaseSweetController = async (req: Request, res: Response) => {
   try {
     const sweetId = req.params.id;
     const { quantity } = req.body;
@@ -31,7 +31,7 @@ export const purchaseSweet = async (req: Request, res: Response) => {
   }
 };
 
-export const restockSweet = async (req: Request, res: Response) => {
+export const restockSweetController = async (req: Request, res: Response) => {
   try {
     const sweetId = req.params.id;
     const { quantity } = req.body;

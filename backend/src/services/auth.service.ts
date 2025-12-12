@@ -3,6 +3,7 @@ import { User} from "../models/user.model";
 
 import { generateToken } from "../utils/jwt";
 import { IUser } from "../interfaces/user.schema";
+import { Schema, Types } from "mongoose";
 
 export interface RegisterInput {
   name: string;
@@ -76,5 +77,25 @@ export const loginService = async ({ email, password }: LoginInput) => {
       role: user.role,
     },
     token,
+  };
+};
+
+
+export const getUserService = async (userId:any) => {
+  // Find user
+  const user: IUser | null = await User.findById(userId)
+
+  if (!user) {
+    throw new Error("User not found.");
+  }
+
+  // Return cleaned user data
+  return {
+    user: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    }
   };
 };

@@ -1,7 +1,7 @@
-import { registerService, loginService } from "../services/auth.service";
+import { registerService, loginService, getUserService } from "../services/auth.service";
 import { Request, Response } from "express";
 
-export const register = async (req: Request, res: Response) => {
+export const registerController = async (req: Request, res: Response) => {
   try {
     const { user, token } = await registerService(req.body);
 
@@ -15,11 +15,16 @@ export const register = async (req: Request, res: Response) => {
       .status(201)
       .json({ message: "User registered", success: true, user });
   } catch (error: any) {
-    res.status(400).json({ success: false, message: error.message || "Registration failed." });
+    res
+      .status(400)
+      .json({
+        success: false,
+        message: error.message || "Registration failed.",
+      });
   }
 };
 
-export const login = async (req: Request, res: Response) => {
+export const loginController = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
@@ -44,3 +49,30 @@ export const login = async (req: Request, res: Response) => {
       .json({ success: false, message: error.message || "Login failed" });
   }
 };
+
+export const logoutController = async (req: Request, res: Response) => {
+  return res
+    .clearCookie("auth", {
+      maxAge: 0,
+    })
+    .status(200)
+    .json({
+      message: "Logout successful",
+      success: true,
+    });
+};
+
+
+export const getUserController = async (req: Request, res: Response) => {
+  try {
+   
+      const user = await getUserService(req.user?._id)
+      res.status(200).json(user);
+  } catch (error: any) {
+    return res
+      .status(400)
+      .json({ success: false, message: error.message || "Login failed" });
+  }
+};
+
+

@@ -1,10 +1,10 @@
 import { Router } from "express";
 import {
-  createSweet,
-  getAllSweets,
-  searchSweets,
-  updateSweet,
-  deleteSweet,
+  createSweetController,
+  getAllSweetsController,
+  searchSweetsController,
+  updateSweetController,
+  deleteSweetController,
 } from "../controllers/sweet.controller";
 
 import { authMiddleware } from "../middlewares/auth.middleware";
@@ -14,12 +14,12 @@ import upload from "../config/multer";
 const router = Router();
 
 // Public or User routes
-router.get("/", authMiddleware, getAllSweets);
-router.get("/search", authMiddleware, searchSweets);
+router.get("/", authMiddleware, getAllSweetsController);
+router.get("/search", authMiddleware, searchSweetsController);
 
 // Admin-only routes
-router.post("/", authMiddleware, adminMiddleware, upload.single('image'), createSweet);
-router.put("/:id", authMiddleware, adminMiddleware, updateSweet);
-router.delete("/:id", authMiddleware, adminMiddleware, deleteSweet);
+router.post("/", authMiddleware, adminMiddleware, upload.single('image'), createSweetController);
+router.put("/:id", authMiddleware, adminMiddleware, updateSweetController);
+router.delete("/:id", authMiddleware, adminMiddleware, deleteSweetController);
 
 export default router;

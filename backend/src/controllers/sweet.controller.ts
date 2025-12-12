@@ -8,7 +8,7 @@ import {
 } from "../services/sweet.service";
 import uploadImage from "../utils/uploadImage";
 
-export const createSweet = async (req: Request, res: Response) => {
+export const createSweetController = async (req: Request, res: Response) => {
   try {
 
     
@@ -41,7 +41,7 @@ export const createSweet = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllSweets = async (req: Request, res: Response) => {
+export const getAllSweetsController = async (req: Request, res: Response) => {
   try {
     const sweets = await getAllSweetsService();
 
@@ -54,7 +54,7 @@ export const getAllSweets = async (req: Request, res: Response) => {
   }
 };
 
-export const searchSweets = async (req: Request, res: Response) => {
+export const searchSweetsController = async (req: Request, res: Response) => {
   try {
     const results = await searchSweetService(req.query);
 
@@ -67,7 +67,7 @@ export const searchSweets = async (req: Request, res: Response) => {
   }
 };
 
-export const updateSweet = async (req: Request, res: Response) => {
+export const updateSweetController = async (req: Request, res: Response) => {
   try {
     const updatedSweet = await updateSweetService(req.params.id, req.body);
 
@@ -87,7 +87,7 @@ export const updateSweet = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteSweet = async (req: Request, res: Response) => {
+export const deleteSweetController = async (req: Request, res: Response) => {
   try {
     const deleted = await deleteSweetService(req.params.id);
 
