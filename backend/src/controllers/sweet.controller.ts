@@ -6,11 +6,27 @@ import {
   updateSweetService,
   deleteSweetService,
 } from "../services/sweet.service";
+import uploadImage from "../utils/uploadImage";
 
 export const createSweet = async (req: Request, res: Response) => {
   try {
+
+    
+    const {name, category, price, quantity} = await req.body;
+
+    if(!name || !category || !price || !quantity){
+       return res.status(400).json({message:"All fields are required.", success:false})
+    }
+
+    if(!req.file){
+       return res.status(400).json({message:"Please upload sweet image.", success:false})
+    }
+
+    const image = await uploadImage(req.file)
+
     const newSweet = await createSweetService({
       ...req.body,
+      image,
       createdBy:req.user?._id
     });
 

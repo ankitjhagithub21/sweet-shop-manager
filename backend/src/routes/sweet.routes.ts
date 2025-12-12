@@ -9,6 +9,7 @@ import {
 
 import { authMiddleware } from "../middlewares/auth.middleware";
 import { adminMiddleware } from "../middlewares/admin.middleware";
+import upload from "../config/multer";
 
 const router = Router();
 
@@ -17,7 +18,7 @@ router.get("/", authMiddleware, getAllSweets);
 router.get("/search", authMiddleware, searchSweets);
 
 // Admin-only routes
-router.post("/", authMiddleware, adminMiddleware, createSweet);
+router.post("/", authMiddleware, adminMiddleware, upload.single('image'), createSweet);
 router.put("/:id", authMiddleware, adminMiddleware, updateSweet);
 router.delete("/:id", authMiddleware, adminMiddleware, deleteSweet);
 
