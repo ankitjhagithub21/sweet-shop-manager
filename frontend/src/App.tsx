@@ -57,6 +57,8 @@ const App = () => {
     },
   ]);
 
+ 
+
   useEffect(() => {
     loadUser();
   }, []);
@@ -64,6 +66,8 @@ const App = () => {
   if(loadingUser){
     return <Loader/>
   }
+
+  
   return (
     <div>
       <RouterProvider router={router} />
