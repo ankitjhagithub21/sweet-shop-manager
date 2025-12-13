@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../constants";
 
 const AddSweetPage = () => {
@@ -14,7 +14,6 @@ const AddSweetPage = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -50,7 +49,6 @@ const AddSweetPage = () => {
 
       toast.success("Sweet added successfully 🍬");
       navigate("/");
-
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Failed to add sweet");
     } finally {
@@ -59,31 +57,28 @@ const AddSweetPage = () => {
   };
 
   return (
-    <div className=" min-h-screen w-full flex justify-center items-center p-6">
+    <div className=" min-h-screen w-full flex flex-col justify-center p-6">
+      <div className="mb-5 max-w-4xl mx-auto flex items-start w-full">
+        <Link className="btn btn-secondary" to={"/"}>
+          Back
+        </Link>
+      </div>
 
-      <div
-      
-        className="w-full max-w-4xl bg-white rounded-xl shadow-2xl p-8"
-      >
+      <div className="w-full max-w-4xl bg-white mx-auto rounded-xl shadow-2xl p-8">
         {/* Header */}
-        <h1 className="text-4xl font-bold text-orange-600 mb-2">
-          Add New Sweet 🍭
-        </h1>
+        <h1 className="text-4xl font-bold text--600 mb-2">Add New Sweet</h1>
         <p className="text-gray-600 mb-8">
           Add delicious sweets to your store inventory.
         </p>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6">
-
           {/* Sweet Name */}
           <div>
-            <label className="label font-semibold text-orange-700">
-              Sweet Name
-            </label>
+            <label className="label text-sm">Sweet Name</label>
             <input
               type="text"
-              className="input input-bordered input-warning w-full"
+              className="input outline-none input-secondary w-full"
               placeholder="e.g. Rasgulla"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -92,12 +87,10 @@ const AddSweetPage = () => {
 
           {/* Category */}
           <div>
-            <label className="label font-semibold text-orange-700">
-              Category
-            </label>
+            <label className="label  text-sm">Category</label>
             <input
               type="text"
-              className="input input-bordered input-warning w-full"
+              className="input  outline-none  input-secondary w-full"
               placeholder="e.g. Milk Sweet"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -106,12 +99,10 @@ const AddSweetPage = () => {
 
           {/* Price */}
           <div>
-            <label className="label font-semibold text-orange-700">
-              Price (₹)
-            </label>
+            <label className="label  text-sm">Price (₹)</label>
             <input
               type="number"
-              className="input input-bordered input-warning w-full"
+              className="input outline-none input-secondary w-full"
               placeholder="e.g. 250"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
@@ -120,12 +111,10 @@ const AddSweetPage = () => {
 
           {/* Quantity */}
           <div>
-            <label className="label font-semibold text-orange-700">
-              Quantity
-            </label>
+            <label className="label text-sm ">Quantity</label>
             <input
               type="number"
-              className="input input-bordered input-warning w-full"
+              className="input outline-none input-secondary w-full"
               placeholder="e.g. 20"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
@@ -134,13 +123,11 @@ const AddSweetPage = () => {
 
           {/* Image Upload */}
           <div className="md:col-span-2">
-            <label className="label font-semibold text-orange-700">
-              Sweet Image
-            </label>
+            <label className="label text-sm">Sweet Image</label>
             <input
               type="file"
               accept="image/*"
-              className="file-input file-input-warning w-full"
+              className="file-input file-input-secondary w-full"
               onChange={handleImageChange}
             />
           </div>
@@ -152,7 +139,7 @@ const AddSweetPage = () => {
               <img
                 src={preview}
                 alt="Preview"
-                className="h-48 rounded-lg border object-cover"
+                className="h-32 w-32 rounded-lg border border-gray-400 object-cover"
               />
             </div>
           )}
@@ -162,7 +149,7 @@ const AddSweetPage = () => {
             <button
               type="submit"
               disabled={loading}
-              className="btn w-full bg-orange-500 hover:bg-orange-600 text-white text-lg"
+              className="btn w-full btn-secondary text-white text-lg"
             >
               {loading ? "Adding Sweet..." : "Add Sweet"}
             </button>

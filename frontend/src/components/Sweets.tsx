@@ -25,6 +25,21 @@ const Sweets = () => {
     fetchSweets();
   }, []);
 
+  const handlePurchase = async(id:string) => {
+      try{
+
+        const res = await axios.post(`${API_URL}/api/inventory/${id}/purchase`,{
+          quantity:1
+        },{withCredentials:true})
+      
+        toast.success(res.data.message)
+
+      }catch(error){
+         console.log(error)
+         toast.error("Failed to purchase sweet.")
+      }
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[60vh]">
@@ -33,6 +48,8 @@ const Sweets = () => {
     );
   }
 
+
+
   return (
     <div className="p-6 min-h-screen">
       {sweets.length === 0 ? (
@@ -40,7 +57,7 @@ const Sweets = () => {
       ) : (
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 container mx-auto">
           {sweets.map((sweet) => (
-            <SweetCard key={sweet._id} sweet={sweet} />
+            <SweetCard key={sweet._id} sweet={sweet} onPurchase={handlePurchase}/>
           ))}
         </div>
       )}
