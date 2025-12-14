@@ -95,31 +95,35 @@ const AddSweetPage = () => {
               placeholder="e.g. Rasgulla"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              name="name"
             />
           </div>
 
           {/* Category */}
           <div>
-            <label className="label  text-sm">Category</label>
+            <label className="label text-sm">Category</label>
             <input
               type="text"
               className="input  outline-none  input-secondary w-full"
               placeholder="e.g. Milk Sweet"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
+              name="category"
             />
           </div>
 
           {/* Price */}
           <div>
-            <label className="label  text-sm">Price (₹)</label>
+            <label className="label text-sm">Price (₹)</label>
             <input
               type="number"
               className="input outline-none input-secondary w-full"
               placeholder="e.g. 250"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
+              name="price"
             />
+
           </div>
 
           {/* Quantity */}
@@ -131,6 +135,7 @@ const AddSweetPage = () => {
               placeholder="e.g. 20"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
+              name="quantity"
             />
           </div>
 
@@ -146,6 +151,7 @@ const AddSweetPage = () => {
               id="sweet-image"
               className="hidden"
               onChange={handleImageChange}
+              name="image"
             />
 
             {/* Upload Box */}
