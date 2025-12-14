@@ -123,7 +123,7 @@ VITE_SERVER_URL=http://localhost:8080
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/sweet-shop-manager.git
+git clone https://github.com/ankitjhagithub21/sweet-shop-manager.git
 cd sweet-shop-manager
 ```
 
@@ -326,24 +326,71 @@ PORT /api/inventory/:id/restock
 
 ## 📸 Screenshots
 
-> Add screenshots here when submitting assessment:
+### Login Page
 
-* Login Page
-* Register Page
-* Home Page (Sweet Listing)
-* Add Sweet Page
-* Edit Sweet Modal
-* Delete Confirmation Modal
+![Login Page](screenshots/login.png)
+
+### Register Page
+![Register Page](screenshots/register.png)
+
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Add Sweet Page
+![Add Sweet Page](screenshots/addsweet.png)
+
+### Edit Sweet Page
+![Add Sweet Page](screenshots/editsweet.png)
+
+### Deletion Confirmation Modal
+![Add Sweet Page](screenshots/deleteconfirmation.png)
 
 ---
 
-## 📌 Future Improvements
+## 🤖 My AI Usage
 
-* Pagination
-* Order history
-* Admin dashboard
-* Unit & integration tests
-* CI/CD pipeline
+### 🔧 AI Tools Used
+
+* **ChatGPT (OpenAI)**
+
+### 🛠️ How I Used AI
+
+* Used ChatGPT to **plan backend architecture** (controllers, services, routes separation).
+* Took help in **designing REST API endpoints** for authentication, sweets, and inventory modules.
+* Used AI assistance to **debug TypeScript errors**, especially around Express request typing and middleware.
+* Generated **boilerplate code** for models, services, and controllers which I then customized.
+* Used AI to **design UI components** using Tailwind CSS, DaisyUI, and Framer Motion.
+* Helped structure **Zustand stores** for global state management.
+* Assisted in writing **README documentation** and improving project explanation for assessment clarity.
+
+### 🧠 Reflection on AI Impact
+
+Using AI significantly **improved my productivity and learning speed**. Instead of spending excessive time searching documentation, I could focus more on **understanding concepts, writing clean code, and solving real problems**. AI acted as a **development assistant**, not a replacement—every generated solution was reviewed, modified, and integrated by me. This helped me deliver a **well-structured, production-ready project** within a limited timeframe.
+
+
+---
+
+## 🌐 Live Deployment
+
+The Sweet Shop Manager application is fully deployed and accessible online:
+
+### 🔹 Frontend (Vercel)
+
+* **URL:** [https://sweet-shop-manager.vercel.app/](https://sweet-shop-manager.vercel.app/)
+* Built using **React + Vite** and deployed on **Vercel**
+
+### 🔹 Backend (Render)
+
+* **Base API URL:** [https://sweet-shop-manager.onrender.com](https://sweet-shop-manager.onrender.com)
+* **Sample API Endpoint:**
+  `GET https://sweet-shop-manager.onrender.com/`
+* Built using **Node.js, Express, TypeScript, and MongoDB** and deployed on **Render**
+
+> ⚠️ Note: The backend may take a few seconds to respond on the first request due to Render’s cold start behavior.
+
+---
+
+You can paste this directly into your README.md without changes ✅
 
 ---
 
