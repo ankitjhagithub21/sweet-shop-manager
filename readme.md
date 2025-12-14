@@ -294,21 +294,20 @@ sweet-shop-manager/
 ## 🧪 API Endpoints (Sample)
 
 ```http
-Auth Routes
+
 POST   /api/auth/register
 POST   /api/auth/login
 GET    /api/auth/me
 
-Sweet Routes
+
 GET    /api/sweets
 GET    /api/sweets/search
 POST   /api/sweets (Admin)
 PUT    /api/sweets/:id (Admin)
 DELETE /api/sweets/:id (Admin)
 
-Inventory Routes
-POST   /api/inventory/:id/purchase
-PORT /api/inventory/:id/restock
+POST   /api/inventory/:id/purchase 
+POST /api/inventory/:id/restock (Admin)
 
 ```
 
@@ -381,9 +380,8 @@ The Sweet Shop Manager application is fully deployed and accessible online:
 
 ### 🔹 Backend (Render)
 
-* **Base API URL:** [https://sweet-shop-manager.onrender.com](https://sweet-shop-manager.onrender.com)
-* **Sample API Endpoint:**
-  `GET https://sweet-shop-manager.onrender.com/`
+* **Backend API URL:** [https://sweet-shop-manager.onrender.com](https://sweet-shop-manager.onrender.com)
+
 * Built using **Node.js, Express, TypeScript, and MongoDB** and deployed on **Render**
 
 > ⚠️ Note: The backend may take a few seconds to respond on the first request due to Render’s cold start behavior.
