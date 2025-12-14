@@ -44,7 +44,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-pink-100 via-yellow-100 to-orange-100 flex items-center justify-center p-4">
+    <div className="min-h-screen w-full  flex items-center justify-center p-4">
       {/* Card */}
       <div className="hero max-w-6xl w-full">
         <div className="hero-content flex-col lg:flex-row shadow-2xl rounded-xl bg-white px-6   py-12">
@@ -55,7 +55,7 @@ const LoginPage = () => {
             transition={{ delay: 0.2 }}
             className="text-center lg:text-left space-y-4"
           >
-            <h1 className="text-4xl font-bold text-orange-600">
+            <h1 className="text-4xl font-bold text-secondary-600">
               Sweet Shop Manager
             </h1>
             <p className="text-gray-600 text-lg">
@@ -68,28 +68,28 @@ const LoginPage = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="card bg-base-100 w-full max-w-sm shrink-0 border border-orange-300 shadow-lg"
+            className="card bg-base-100 w-full max-w-sm shrink-0 border border-secondary shadow-lg"
           >
             <div className="card-body">
               <form onSubmit={handleLogin}>
                 <fieldset className="fieldset space-y-3">
-                  <label className="label font-semibold text-orange-700">
+                  <label className="label font-semibold ">
                     Email
                   </label>
                   <input
                     type="email"
-                    className="input input-bordered input-warning"
+                    className="input input-secondary"
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
 
-                  <label className="label font-semibold text-orange-700">
+                  <label className="label font-semibold ">
                     Password
                   </label>
                   <input
                     type="password"
-                    className="input input-bordered input-warning"
+                    className="input input-secondary"
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -98,7 +98,7 @@ const LoginPage = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="btn bg-orange-500 hover:bg-orange-600 text-white mt-4"
+                    className="btn btn-secondary mt-4"
                   >
                     {loading ? "Logging in..." : "Login"}
                   </button>
@@ -108,7 +108,7 @@ const LoginPage = () => {
                 Don’t have an account?{" "}
                 <Link
                   to="/register"
-                  className="text-orange-600 font-semibold hover:underline"
+                  className="text-secondary font-semibold hover:underline"
                 >
                   Create one here
                 </Link>

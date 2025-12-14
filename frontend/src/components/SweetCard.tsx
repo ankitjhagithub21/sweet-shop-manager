@@ -6,36 +6,44 @@ import type { Sweet } from "../types";
 interface SweetCardProps {
   sweet: Sweet;
   onPurchase: (_id: string) => void;
-  onDelete:(_id:string)=>void;
-  onEdit:(sweet:Sweet)=>void;
+  onDelete: (_id: string) => void;
+  onEdit: (sweet: Sweet) => void;
 }
 
 const SweetCard = ({ sweet, onPurchase, onDelete, onEdit }: SweetCardProps) => {
- 
   const user = useUserStore((state) => state.user);
-
   const isAdmin = user?.role === "admin";
+  const isOutOfStock = sweet.quantity === 0;
 
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: isOutOfStock ? 1 : 1.05 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="card bg-white shadow-xl relative overflow-hidden"
+      className={`card bg-white shadow-xl relative overflow-hidden ${
+        isOutOfStock ? "opacity-80" : ""
+      }`}
     >
+      {/* 🔴 Out of Stock Badge */}
+      {isOutOfStock && (
+        <div className="absolute top-2 left-2 z-10 badge badge-error text-white">
+          Out of Stock
+        </div>
+      )}
+
       {/* 🔐 Admin Buttons */}
       {isAdmin && (
         <div className="absolute top-2 right-2 z-10 flex gap-2">
           <button
-             onClick={() => onEdit(sweet)}
+            onClick={() => onEdit(sweet)}
             className="btn btn-sm btn-warning text-white"
           >
             <FaEdit />
           </button>
 
           <button
-            className="btn btn-sm btn-error text-white"
             onClick={() => onDelete(sweet._id)}
+            className="btn btn-sm btn-error text-white"
           >
             <FaTrash />
           </button>
@@ -61,10 +69,14 @@ const SweetCard = ({ sweet, onPurchase, onDelete, onEdit }: SweetCardProps) => {
 
           <button
             onClick={() => onPurchase(sweet._id)}
-            disabled={sweet.quantity < 1}
-            className="btn btn-success"
+            disabled={isOutOfStock}
+            className={`btn ${
+              isOutOfStock
+                ? "btn-disabled cursor-not-allowed"
+                : "btn-success"
+            }`}
           >
-            Purchase
+            {isOutOfStock ? "Unavailable" : "Purchase"}
           </button>
         </div>
       </div>
