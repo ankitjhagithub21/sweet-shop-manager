@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm sticky">
       <div className="navbar-start">   
-        <Link to={"/"} className="btn  bg-gray-200 text-xl">Sweet Store Manager</Link>
+        <Link to={"/"} className="btn  bg-gray-200 text-xl">Sweet Shop</Link>
       </div>
       
       <div className="navbar-end">

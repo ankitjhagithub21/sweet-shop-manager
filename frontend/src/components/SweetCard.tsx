@@ -15,7 +15,7 @@ const SweetCard = ({sweet, onPurchase}:SweetCardProps) => {
       whileHover={{ scale: 1.05 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="card bg-white shadow-xl border border-orange-300 relative"
+      className="card bg-white shadow-xl relative"
     >
     
       <figure>
@@ -28,7 +28,7 @@ const SweetCard = ({sweet, onPurchase}:SweetCardProps) => {
       </figure>
 
       <div className="card-body">
-        <h2 className="text-xl font-semibold text-orange-700">{sweet.name}</h2>
+        <h2 className="text-xl font-semibold">{sweet.name}</h2>
         <p className="text-sm text-gray-600">{sweet.category}</p>
 
         <div className="flex justify-between items-center mt-3">
