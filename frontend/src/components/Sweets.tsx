@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState } from "react";
 import EditSweetModal from "./EditSweetModal";
 import { useSweetStore } from "../store/useSweetStore";
+import DeleteSweetModal from "./DeleteSweetModal";
 
 interface SweetsProps {
   sweets: Sweet[];
@@ -14,8 +15,10 @@ interface SweetsProps {
 const Sweets = ({ sweets }: SweetsProps) => {
   const [selectedSweet, setSelectedSweet] = useState<Sweet | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [sweetId, setSweetId] = useState<string | null>(null)
 
-  const {fetchSweets} = useSweetStore()
+  const { removeSweet} = useSweetStore();
 
   const handlePurchase = async (id: string) => {
     try {
@@ -34,26 +37,37 @@ const Sweets = ({ sweets }: SweetsProps) => {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = (id:string) => {
+    setSweetId(id)
+    setIsDeleteOpen(true);
+  };
+
+   const confirmDelete = async () => {
+    if (!sweetId) return;
+
     try {
-      const res = await axios.delete(`${API_URL}/api/sweets/${id}`, {
-        withCredentials: true,
-      });
-      toast.success(res.data.message);
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to delete sweet.");
+      await axios.delete(
+        `${API_URL}/api/sweets/${sweetId}`,
+        { withCredentials: true }
+      );
+
+      toast.success("Sweet deleted successfully");
+      removeSweet(sweetId)
+    } catch {
+      toast.error("Failed to delete sweet");
+    } finally {
+      setIsDeleteOpen(false);
+      setSelectedSweet(null);
     }
   };
+
 
   const handleEdit = (sweet:Sweet) => {
     setSelectedSweet(sweet)
     setIsModalOpen(true)
   };
 
-  const handleSave = () => {
-     fetchSweets()
-  }
+  
 
   return (
     <>
@@ -78,7 +92,16 @@ const Sweets = ({ sweets }: SweetsProps) => {
         sweet={selectedSweet}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onUpdated={handleSave}
+  
+      />
+        {/* 🧨 Delete Confirmation Modal */}
+      <DeleteSweetModal
+        isOpen={isDeleteOpen}
+        onConfirm={confirmDelete}
+        onCancel={() => {
+          setIsDeleteOpen(false);
+          setSweetId(null);
+        }}
       />
     </>
   );

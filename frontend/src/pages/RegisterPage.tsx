@@ -51,7 +51,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-pink-100 via-yellow-100 to-secondary-100 flex items-center justify-center p-4">
+    <div className="min-h-screen w-full flex items-center justify-center p-4">
       <div className="hero max-w-6xl w-full">
         <div className="hero-content flex-col lg:flex-row-reverse shadow-2xl rounded-xl bg-white px-6 py-12">
           {/* Right Section Text */}

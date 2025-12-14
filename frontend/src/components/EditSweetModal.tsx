@@ -4,19 +4,19 @@ import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import { API_URL } from "../constants";
 import type { Sweet } from "../types";
+import { useSweetStore } from "../store/useSweetStore";
 
 interface EditSweetModalProps {
   sweet: Sweet | null;
   isOpen: boolean;
   onClose: () => void;
-  onUpdated: () => void;
 }
 
 const EditSweetModal = ({
   sweet,
   isOpen,
   onClose,
-  onUpdated,
+
 }: EditSweetModalProps) => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -25,6 +25,8 @@ const EditSweetModal = ({
   const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const { updateSweet } = useSweetStore();
 
   useEffect(() => {
     if (sweet) {
@@ -51,12 +53,12 @@ const EditSweetModal = ({
       formData.append("quantity", quantity);
       if (image) formData.append("image", image);
 
-      await axios.put(`${API_URL}/api/sweets/${sweet._id}`, formData, {
+      const res = await axios.put(`${API_URL}/api/sweets/${sweet._id}`, formData, {
         withCredentials: true,
       });
 
-      toast.success("Sweet updated successfully.");
-      onUpdated();
+      toast.success(res.data.message);
+      updateSweet(res.data.sweet);
       onClose();
     } catch {
       toast.error("Update failed");

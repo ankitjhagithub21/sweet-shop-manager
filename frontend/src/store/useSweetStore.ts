@@ -18,8 +18,9 @@ interface SweetStore {
 
   fetchSweets: (query?: string) => Promise<void>;
   clearError: () => void;
+  removeSweet: (id: string) => void;
+  updateSweet: (sweet: Sweet) => void;
 }
-
 
 export const useSweetStore = create<SweetStore>((set) => ({
   sweets: [],
@@ -47,4 +48,15 @@ export const useSweetStore = create<SweetStore>((set) => ({
   },
 
   clearError: () => set({ error: null }),
+
+  removeSweet: (id) =>
+    set((state) => ({
+      sweets: state.sweets.filter((s) => s._id !== id),
+    })),
+  updateSweet: (updatedSweet) =>
+    set((state) => ({
+      sweets: state.sweets.map((s) =>
+        s._id === updatedSweet._id ? updatedSweet : s
+      ),
+    })),
 }));
