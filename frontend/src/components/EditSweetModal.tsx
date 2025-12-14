@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
@@ -12,12 +12,13 @@ interface EditSweetModalProps {
   onClose: () => void;
 }
 
-const EditSweetModal = ({
+const EditSweetModal = memo(({
   sweet,
   isOpen,
   onClose,
 
 }: EditSweetModalProps) => {
+  
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
@@ -169,6 +170,6 @@ const EditSweetModal = ({
       </motion.div>
     </dialog>
   );
-};
+});
 
 export default EditSweetModal;

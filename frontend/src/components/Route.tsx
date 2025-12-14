@@ -1,41 +1,54 @@
 import { createBrowserRouter } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
-import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage";
-import RegisterPage from "../pages/RegisterPage";
-import NotFoundPage from "../pages/NotFoundPage";
-import AddSweetPage from "../pages/AddSweetPage";
+const HomePage = lazy(() => import("../pages/HomePage"));
+const LoginPage = lazy(() => import("../pages/LoginPage"));
+const RegisterPage = lazy(() => import("../pages/RegisterPage"));
+const AddSweetPage = lazy(() => import("../pages/AddSweetPage"));
+const NotFoundPage = lazy(() => import("../pages/NotFoundPage"));
+
+import MainLayout from "../layouts/MainLayout";
 
 import ProtectedRoute from "../routes/ProtectedRoute";
 import PublicRoute from "../routes/PublicRoute";
 import AdminRoute from "../routes/AdminRoute";
-
-import Navbar from "../components/Navbar";
+import Loader from "./Loader";
 
 const router = createBrowserRouter([
   {
-    path: "/",
     element: (
       <ProtectedRoute>
-        <Navbar />
-        <HomePage />
+        <MainLayout />
       </ProtectedRoute>
     ),
-  },
-  {
-    path: "/add",
-    element: (
-      <AdminRoute>
-        <Navbar />
-        <AddSweetPage />
-      </AdminRoute>
-    ),
+    children: [
+      {
+        path: "/",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <HomePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/add",
+        element: (
+          <AdminRoute>
+            <Suspense fallback={<Loader />}>
+              <AddSweetPage />
+            </Suspense>
+          </AdminRoute>
+        ),
+      },
+    ],
   },
   {
     path: "/login",
     element: (
       <PublicRoute>
-        <LoginPage />
+        <Suspense fallback={<Loader />}>
+          <LoginPage />
+        </Suspense>
       </PublicRoute>
     ),
   },
@@ -43,13 +56,19 @@ const router = createBrowserRouter([
     path: "/register",
     element: (
       <PublicRoute>
-        <RegisterPage />
+        <Suspense fallback={<Loader />}>
+          <RegisterPage />
+        </Suspense>
       </PublicRoute>
     ),
   },
   {
     path: "*",
-    element: <NotFoundPage />,
+    element: (
+      <Suspense fallback={<Loader />}>
+        <NotFoundPage />
+      </Suspense>
+    ),
   },
 ]);
 

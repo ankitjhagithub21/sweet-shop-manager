@@ -1,18 +1,21 @@
 import Sweets from "../components/Sweets";
 import { useSweetStore } from "../store/useSweetStore";
 import Spinner from "../components/Spinner";
+import SearchFilter from "../components/SearchFilter";
+import { memo } from "react";
 
-const HomePage = () => {
-  const { sweets, loading } = useSweetStore();
+const HomePage = memo(() => {
+  
+  const { sweets, loading} = useSweetStore();
 
-  if (loading) return <Spinner />;
+ 
 
   return (
     <>
-      {/* <Hero/> */}
-      <Sweets sweets={sweets} />
+      <SearchFilter />
+     { loading ? <Spinner/> :  <Sweets sweets={sweets} /> }
     </>
   );
-};
+});
 
 export default HomePage;

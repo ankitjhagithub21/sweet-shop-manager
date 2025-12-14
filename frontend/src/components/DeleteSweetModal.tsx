@@ -13,6 +13,7 @@ const DeleteSweetModal = ({
   if (!isOpen) return null;
 
   return (
+    
     <dialog open className="modal modal-bottom sm:modal-middle">
       <div className="modal-box">
         <h3 className="font-bold text-lg text-red-600">

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useUserStore } from "../store/useUserStore";
 import type { Sweet } from "../types";
+import { memo } from "react";
 
 interface SweetCardProps {
   sweet: Sweet;
@@ -10,7 +11,7 @@ interface SweetCardProps {
   onEdit: (sweet: Sweet) => void;
 }
 
-const SweetCard = ({ sweet, onPurchase, onDelete, onEdit }: SweetCardProps) => {
+const SweetCard = memo(({ sweet, onPurchase, onDelete, onEdit }: SweetCardProps) => {
   const user = useUserStore((state) => state.user);
   const isAdmin = user?.role === "admin";
   const isOutOfStock = sweet.quantity === 0;
@@ -82,6 +83,6 @@ const SweetCard = ({ sweet, onPurchase, onDelete, onEdit }: SweetCardProps) => {
       </div>
     </motion.div>
   );
-};
+});
 
 export default SweetCard;

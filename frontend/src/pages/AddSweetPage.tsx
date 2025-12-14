@@ -6,6 +6,7 @@ import { API_URL } from "../constants";
 import { useSweetStore } from "../store/useSweetStore";
 
 const AddSweetPage = () => {
+  
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");

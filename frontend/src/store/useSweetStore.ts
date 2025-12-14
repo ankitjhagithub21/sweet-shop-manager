@@ -8,7 +8,8 @@ interface SweetStore {
   loading: boolean;
   error: string | null;
 
-  fetchSweets: (query?: string) => Promise<void>;
+  fetchSweets: () => Promise<void>;
+  searchSweets: (filter: Object) => Promise<void>;
   addSweet: (sweet: Sweet) => void;
   removeSweet: (id: string) => void;
   updateSweet: (sweet: Sweet) => void;
@@ -37,6 +38,20 @@ export const useSweetStore = create<SweetStore>((set) => ({
         loading: false,
       });
     }
+  },
+
+  searchSweets: async (filters:Object) => {
+    set({ loading: true });
+
+    const res = await axios.get(`${API_URL}/api/sweets/search`, {
+      params: filters,
+      withCredentials: true,
+    });
+
+    set({
+      sweets: res.data.results,
+      loading: false,
+    });
   },
 
   addSweet: (sweet) =>
