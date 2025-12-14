@@ -10,8 +10,7 @@ import uploadImage from "../utils/uploadImage";
 
 export const createSweetController = async (req: Request, res: Response) => {
   try {
-
-    
+  
     const {name, category, price, quantity} = await req.body;
 
     if(!name || !category || !price || !quantity){
@@ -69,7 +68,20 @@ export const searchSweetsController = async (req: Request, res: Response) => {
 
 export const updateSweetController = async (req: Request, res: Response) => {
   try {
-    const updatedSweet = await updateSweetService(req.params.id, req.body);
+
+    const updateData: any = { ...req.body };
+
+    // Upload new image only if provided
+    if (req.file) {
+      const imageUrl = await uploadImage(req.file);
+      updateData.image = imageUrl;
+    }
+
+    const updatedSweet = await updateSweetService(
+      req.params.id,
+      updateData
+    );
+
 
     if (!updatedSweet) {
       return res

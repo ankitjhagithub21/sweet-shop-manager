@@ -19,7 +19,7 @@ router.get("/search", authMiddleware, searchSweetsController);
 
 // Admin-only routes
 router.post("/", authMiddleware, adminMiddleware, upload.single('image'), createSweetController);
-router.put("/:id", authMiddleware, adminMiddleware, updateSweetController);
+router.put("/:id", authMiddleware, adminMiddleware,upload.single('image') , updateSweetController);
 router.delete("/:id", authMiddleware, adminMiddleware, deleteSweetController);
 
 export default router;

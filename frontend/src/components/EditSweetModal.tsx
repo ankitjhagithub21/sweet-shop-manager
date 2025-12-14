@@ -55,7 +55,7 @@ const EditSweetModal = ({
         withCredentials: true,
       });
 
-      toast.success("Sweet updated 🍬");
+      toast.success("Sweet updated successfully.");
       onUpdated();
       onClose();
     } catch {
@@ -74,44 +74,67 @@ const EditSweetModal = ({
         animate={{ scale: 1, opacity: 1 }}
         className="modal-box max-w-3xl"
       >
-        <h3 className="font-bold text-2xl text-orange-600 mb-4">
-          Edit Sweet 🍭
-        </h3>
+        <h3 className="font-semibold text-2xl  mb-4">Edit Sweet</h3>
 
         <form onSubmit={handleUpdate} className="grid grid-cols-2 gap-4">
-          <input
-            className="input input-bordered col-span-2"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Sweet Name"
-          />
+          <div>
+            <label htmlFor="name" className="text-xs text-gray-600">
+              Sweet Name
+            </label>
+            <input
+              className="input input-bordered outline-none col-span-2"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Sweet Name"
+              name="name"
+            />
+          </div>
 
-          <input
-            className="input input-bordered"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            placeholder="Category"
-          />
+          <div>
+            <label htmlFor="category" className="text-xs text-gray-600">
+              Category
+            </label>
+            <input
+              className="input input-bordered outline-none"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="Category"
+              name="category"
+            />
+          </div>
 
-          <input
-            type="number"
-            className="input input-bordered"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            placeholder="Price"
-          />
+          <div className="flex flex-col">
+            <label htmlFor="price" className="text-xs text-gray-600">
+              Price
+            </label>
+            <input
+              type="number"
+              className="input input-bordered outline-none"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              placeholder="Price"
+              name="price"
+            />
+          </div>
 
-          <input
-            type="number"
-            className="input input-bordered"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            placeholder="Quantity"
-          />
+          <div>
+            <label htmlFor="quantity" className="text-xs text-gray-600">
+              Quantity
+            </label>
+
+            <input
+              type="number"
+              className="input input-bordered outline-none"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              placeholder="Quantity"
+              name="quantity"
+            />
+          </div>
 
           <input
             type="file"
-            className="file-input file-input-warning col-span-2"
+            className="file-input file-secondary col-span-2"
             onChange={(e) => {
               if (e.target.files) {
                 setImage(e.target.files[0]);
@@ -128,17 +151,13 @@ const EditSweetModal = ({
           )}
 
           <div className="modal-action col-span-2">
-            <button
-              type="button"
-              className="btn"
-              onClick={onClose}
-            >
+            <button type="button" className="btn" onClick={onClose}>
               Cancel
             </button>
 
             <button
               type="submit"
-              className="btn bg-orange-500 text-white"
+              className="btn btn-secondary"
               disabled={loading}
             >
               {loading ? "Updating..." : "Update"}

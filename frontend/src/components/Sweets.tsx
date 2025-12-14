@@ -5,6 +5,7 @@ import type { Sweet } from "../types";
 import axios from "axios";
 import { useState } from "react";
 import EditSweetModal from "./EditSweetModal";
+import { useSweetStore } from "../store/useSweetStore";
 
 interface SweetsProps {
   sweets: Sweet[];
@@ -13,6 +14,8 @@ interface SweetsProps {
 const Sweets = ({ sweets }: SweetsProps) => {
   const [selectedSweet, setSelectedSweet] = useState<Sweet | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const {fetchSweets} = useSweetStore()
 
   const handlePurchase = async (id: string) => {
     try {
@@ -48,6 +51,10 @@ const Sweets = ({ sweets }: SweetsProps) => {
     setIsModalOpen(true)
   };
 
+  const handleSave = () => {
+     fetchSweets()
+  }
+
   return (
     <>
       <div className="p-6 min-h-screen">
@@ -71,7 +78,7 @@ const Sweets = ({ sweets }: SweetsProps) => {
         sweet={selectedSweet}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onUpdated={() => window.location.reload()}
+        onUpdated={handleSave}
       />
     </>
   );
