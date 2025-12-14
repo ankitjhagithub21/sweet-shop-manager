@@ -73,7 +73,7 @@ const SweetCard = ({ sweet, onPurchase, onDelete, onEdit }: SweetCardProps) => {
             className={`btn ${
               isOutOfStock
                 ? "btn-disabled cursor-not-allowed"
-                : "btn-success"
+                : "btn-secondary"
             }`}
           >
             {isOutOfStock ? "Unavailable" : "Purchase"}

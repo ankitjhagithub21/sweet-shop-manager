@@ -1,15 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 import { API_URL } from "../constants";
-
-export interface Sweet {
-  _id: string;
-  name: string;
-  category: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
+import type { Sweet } from "../types";
 
 interface SweetStore {
   sweets: Sweet[];
@@ -17,7 +9,7 @@ interface SweetStore {
   error: string | null;
 
   fetchSweets: (query?: string) => Promise<void>;
-  clearError: () => void;
+  addSweet: (sweet: Sweet) => void;
   removeSweet: (id: string) => void;
   updateSweet: (sweet: Sweet) => void;
 }
@@ -47,12 +39,16 @@ export const useSweetStore = create<SweetStore>((set) => ({
     }
   },
 
-  clearError: () => set({ error: null }),
+  addSweet: (sweet) =>
+    set((state) => ({
+      sweets: [...state.sweets, sweet],
+    })),
 
   removeSweet: (id) =>
     set((state) => ({
       sweets: state.sweets.filter((s) => s._id !== id),
     })),
+
   updateSweet: (updatedSweet) =>
     set((state) => ({
       sweets: state.sweets.map((s) =>
