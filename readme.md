@@ -297,6 +297,7 @@ sweet-shop-manager/
 
 POST   /api/auth/register
 POST   /api/auth/login
+POST   /api/auth/logout
 GET    /api/auth/me
 
 
@@ -388,9 +389,6 @@ The Sweet Shop Manager application is fully deployed and accessible online:
 
 ---
 
-You can paste this directly into your README.md without changes ✅
-
----
 
 ## 🙌 Author
 
