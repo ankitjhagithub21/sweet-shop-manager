@@ -72,7 +72,7 @@ const Sweets = memo(({ sweets }: SweetsProps) => {
 
   return (
     <>
-      <div className="p-6 min-h-screen">
+      <div className="p-4 min-h-screen">
         {sweets?.length === 0 ? (
           <p className="text-center text-gray-600">No sweets available.</p>
         ) : (

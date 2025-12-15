@@ -11,10 +11,10 @@ const HomePage = memo(() => {
  
 
   return (
-    <>
+    <div className="flex lg:flex-row flex-col px-5 py-10">
       <SearchFilter />
      { loading ? <Spinner/> :  <Sweets sweets={sweets} /> }
-    </>
+    </div>
   );
 });
 
