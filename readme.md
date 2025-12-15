@@ -203,8 +203,6 @@ sweet-shop-manager/
 │   │   └── vite.svg
 │   ├── src/
 │   │   ├── App.tsx
-│   │   ├── assets/
-│   │   │   └── react.svg
 │   │   ├── components/
 │   │   │   ├── DeleteSweetModal.tsx
 │   │   │   ├── EditSweetModal.tsx
@@ -247,7 +245,6 @@ sweet-shop-manager/
     ├── home.png
     ├── login.png
     └── register.png
-
 ```
 
 ### Backend (Clean Architecture)
@@ -354,11 +351,17 @@ POST /api/inventory/:id/restock (Admin)
 
 ### Edit Sweet Page
 
-![Add Sweet Page](screenshots/editsweet.png)
+![Edit Sweet Page](screenshots/editsweet.png)
+
+
+### Restock Sweet Quantity
+
+![Restock Sweet](screenshots/restock.png)
+
 
 ### Deletion Confirmation Modal
 
-![Add Sweet Page](screenshots/deleteconfirmation.png)
+![Delete Sweet](screenshots/deleteconfirmation.png)
 
 ---
 

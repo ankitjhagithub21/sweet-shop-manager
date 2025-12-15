@@ -136,6 +136,8 @@ const AddSweetPage = () => {
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
               name="quantity"
+              min={1}
+              
             />
           </div>
 

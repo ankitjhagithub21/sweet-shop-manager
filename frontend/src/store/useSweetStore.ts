@@ -13,6 +13,7 @@ interface SweetStore {
   addSweet: (sweet: Sweet) => void;
   removeSweet: (id: string) => void;
   updateSweet: (sweet: Sweet) => void;
+  restockSweet: (sweetId:string, quan:number) => void;
 }
 
 export const useSweetStore = create<SweetStore>((set) => ({
@@ -40,7 +41,7 @@ export const useSweetStore = create<SweetStore>((set) => ({
     }
   },
 
-  searchSweets: async (filters:Object) => {
+  searchSweets: async (filters: Object) => {
     set({ loading: true });
 
     const res = await axios.get(`${API_URL}/api/sweets/search`, {
@@ -68,6 +69,13 @@ export const useSweetStore = create<SweetStore>((set) => ({
     set((state) => ({
       sweets: state.sweets.map((s) =>
         s._id === updatedSweet._id ? updatedSweet : s
+      ),
+    })),
+
+  restockSweet: (sweetId:string, quan:number) =>
+    set((state) => ({
+      sweets: state.sweets.map((s) =>
+        s._id === sweetId ? {...s, quantity:quan} : s
       ),
     })),
 }));

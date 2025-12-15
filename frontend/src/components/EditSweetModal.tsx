@@ -132,6 +132,7 @@ const EditSweetModal = memo(({
               onChange={(e) => setQuantity(e.target.value)}
               placeholder="Quantity"
               name="quantity"
+              min={1}
             />
           </div>
 

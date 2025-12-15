@@ -50,7 +50,7 @@ const SearchFilter = memo(() => {
     <div className="shadow-lg h-fit p-5 rounded-lg">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg">Filters</h2>
-        <button className="btn btn-secondary" onClick={clearFilter}>
+        <button className="btn btn-secondary btn-sm" onClick={clearFilter}>
           {" "}
           <FaX /> Clear All
         </button>

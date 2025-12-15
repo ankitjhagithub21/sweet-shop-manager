@@ -7,6 +7,7 @@ import { memo, useCallback, useState } from "react";
 import EditSweetModal from "./EditSweetModal";
 import { useSweetStore } from "../store/useSweetStore";
 import DeleteSweetModal from "./DeleteSweetModal";
+import RestockSweetModal from "./RestockModal";
 
 interface SweetsProps {
   sweets: Sweet[];
@@ -17,8 +18,9 @@ const Sweets = memo(({ sweets }: SweetsProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [sweetId, setSweetId] = useState<string | null>(null);
+  const [restockId, setRestockId] = useState<string | null>(null);
 
-  const { removeSweet } = useSweetStore();
+  const { removeSweet, restockSweet, updateSweet } = useSweetStore();
 
   const handlePurchase = async (id: string) => {
     try {
@@ -31,6 +33,7 @@ const Sweets = memo(({ sweets }: SweetsProps) => {
       );
 
       toast.success(res.data.message);
+      updateSweet(res.data.sweet)
     } catch (error) {
       console.log(error);
       toast.error("Failed to purchase sweet.");
@@ -69,6 +72,33 @@ const Sweets = memo(({ sweets }: SweetsProps) => {
     setIsModalOpen(false);
   }, [isModalOpen]);
 
+  const onRestock = (currentId: string) => {
+    setRestockId(currentId);
+  };
+
+  const handleRestock = async (quantity: string) => {
+   
+    try {
+      const res = await axios.post(
+        `${API_URL}/api/inventory/${restockId}/restock`,
+        {
+          quantity: quantity,
+        },
+        { withCredentials: true }
+      );
+
+      toast.success(res.data.message);
+      if(restockId){
+        restockSweet(restockId, Number(quantity));
+      }
+      setRestockId(null)
+      
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to restock sweet.");
+    }
+  };
+
   return (
     <>
       <div className="p-4">
@@ -83,6 +113,7 @@ const Sweets = memo(({ sweets }: SweetsProps) => {
                 onPurchase={handlePurchase}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
+                onRestock={onRestock}
               />
             ))}
           </div>
@@ -100,6 +131,14 @@ const Sweets = memo(({ sweets }: SweetsProps) => {
         onCancel={() => {
           setIsDeleteOpen(false);
           setSweetId(null);
+        }}
+      />
+
+      <RestockSweetModal
+        isOpen={restockId ? true : false}
+        onConfirm={handleRestock}
+        onCancel={() => {
+          setRestockId(null);
         }}
       />
     </>
