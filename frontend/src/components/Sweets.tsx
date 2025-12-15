@@ -13,7 +13,6 @@ interface SweetsProps {
 }
 
 const Sweets = memo(({ sweets }: SweetsProps) => {
- 
   const [selectedSweet, setSelectedSweet] = useState<Sweet | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -72,11 +71,11 @@ const Sweets = memo(({ sweets }: SweetsProps) => {
 
   return (
     <>
-      <div className="p-4 min-h-screen">
+      <div className="p-4">
         {sweets?.length === 0 ? (
           <p className="text-center text-gray-600">No sweets available.</p>
         ) : (
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 container mx-auto">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {sweets?.map((sweet) => (
               <SweetCard
                 key={sweet._id}
