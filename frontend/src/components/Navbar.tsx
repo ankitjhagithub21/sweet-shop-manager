@@ -22,7 +22,7 @@ const Navbar = memo(() => {
     <div className="navbar bg-base-100 shadow-sm sticky top-0 w-full z-50">
       <div className="navbar-start">
         <Link to={"/"} className="btn  bg-gray-200 text-xl">
-          Sweet Shop
+          Sweet Shop <span className="lg:block hidden">Manager</span>
         </Link>
       </div>
 

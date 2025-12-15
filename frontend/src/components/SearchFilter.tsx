@@ -93,7 +93,7 @@ const SearchFilter = memo(() => {
         </div>
 
         <div>
-          <div className="flex flex-col">
+          <div className="flex flex-col lg:mt-2 mt-0">
             <label htmlFor="maxPrice" className="text-sm text-gray-600 mb-2">
               Maximum Price
             </label>

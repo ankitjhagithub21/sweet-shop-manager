@@ -208,6 +208,7 @@ sweet-shop-manager/
 │   │   │   ├── EditSweetModal.tsx
 │   │   │   ├── Loader.tsx
 │   │   │   ├── Navbar.tsx
+│   │   │   ├── RestockModal.tsx
 │   │   │   ├── Route.tsx
 │   │   │   ├── SearchFilter.tsx
 │   │   │   ├── Spinner.tsx
@@ -244,7 +245,8 @@ sweet-shop-manager/
     ├── editsweet.png
     ├── home.png
     ├── login.png
-    └── register.png
+    ├── register.png
+    └── restock.png
 ```
 
 ### Backend (Clean Architecture)
