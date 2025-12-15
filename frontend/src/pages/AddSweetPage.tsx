@@ -2,11 +2,10 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { API_URL } from "../constants";
+import { API_URL, categories } from "../constants";
 import { useSweetStore } from "../store/useSweetStore";
 
 const AddSweetPage = () => {
-  
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
@@ -100,7 +99,7 @@ const AddSweetPage = () => {
           </div>
 
           {/* Category */}
-          <div>
+          {/* <div>
             <label className="label text-sm">Category</label>
             <input
               type="text"
@@ -110,6 +109,25 @@ const AddSweetPage = () => {
               onChange={(e) => setCategory(e.target.value)}
               name="category"
             />
+          </div> */}
+          <div className="flex flex-col mt-2">
+            <label htmlFor="category" className="text-sm text-gray-600 ">
+              Category
+            </label>
+            {/* 🍩 Category Filter */}
+            <select
+              className="select select-secondary outline-none w-full"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              name="category"
+              id="category"
+            >
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Price */}
@@ -123,7 +141,6 @@ const AddSweetPage = () => {
               onChange={(e) => setPrice(e.target.value)}
               name="price"
             />
-
           </div>
 
           {/* Quantity */}
@@ -137,7 +154,6 @@ const AddSweetPage = () => {
               onChange={(e) => setQuantity(e.target.value)}
               name="quantity"
               min={1}
-              
             />
           </div>
 

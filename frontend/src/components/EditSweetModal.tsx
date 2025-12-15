@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-import { API_URL } from "../constants";
+import { API_URL, categories } from "../constants";
 import type { Sweet } from "../types";
 import { useSweetStore } from "../store/useSweetStore";
 
@@ -93,17 +93,24 @@ const EditSweetModal = memo(({
             />
           </div>
 
-          <div>
-            <label htmlFor="category" className="text-xs text-gray-600">
+            <div className="flex flex-col">
+            <label htmlFor="category" className="text-sm text-gray-600 text-sm">
               Category
             </label>
-            <input
-              className="input input-bordered outline-none"
+            {/* 🍩 Category Filter */}
+            <select
+              className="select select-bordered outline-none"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              placeholder="Category"
               name="category"
-            />
+              id="category"
+            >
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="flex flex-col">

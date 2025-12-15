@@ -63,7 +63,7 @@ const SweetCard = memo(
         </figure>
 
         <div className="card-body">
-          <h2 className="text-xl font-semibold">{sweet.name}</h2>
+          <h2 className="text-lg truncate font-semibold">{sweet.name}</h2>
           <p className="text-sm text-gray-600">{sweet.category}</p>
 
           <div className="flex justify-between items-center mt-3">

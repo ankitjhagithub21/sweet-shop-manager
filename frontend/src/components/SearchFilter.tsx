@@ -2,14 +2,9 @@ import { memo, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useSweetStore } from "../store/useSweetStore";
 import { FaX } from "react-icons/fa6";
+import { categories } from "../constants";
 
-const categories = [
-  "All",
-  "Indian Dessert",
-  "Chocolate",
-  "Dry Fruit",
-  "Bengali",
-];
+
 
 const SearchFilter = memo(() => {
   const { searchSweets, fetchSweets } = useSweetStore();
@@ -47,7 +42,7 @@ const SearchFilter = memo(() => {
   };
 
   return (
-    <div className="shadow-lg h-fit p-5 rounded-lg">
+    <div className="shadow-lg h-fit  p-5 rounded-lg">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg">Filters</h2>
         <button className="btn btn-secondary btn-sm" onClick={clearFilter}>
@@ -114,7 +109,7 @@ const SearchFilter = memo(() => {
             </label>
             {/* 🍩 Category Filter */}
             <select
-              className="select select-bordered"
+              className="select select-bordered outline-none"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               name="category"
